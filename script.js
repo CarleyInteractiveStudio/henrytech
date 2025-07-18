@@ -1,7 +1,7 @@
 const { createClient } = supabase;
 
 // Inicializar Supabase correctamente en navegador
-(
+const supabase = window.supabase.createClient(
   "https://dqpdhergtcyqvmjirlzv.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcGRoZXJndGN5cXZtamlybHp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4Njc2OTIsImV4cCI6MjA2ODQ0MzY5Mn0.Z-LE-uUE3k9BqZWstfsTAxOiAu90dD0YwaK0uSH1WJw"
 );
