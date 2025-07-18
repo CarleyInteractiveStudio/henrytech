@@ -5,106 +5,167 @@
   <title>Boutik HenryTech</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="estilos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
-    /* Animaciones simples */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+    }
+
+    header {
+      background: #0ea5e9;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 4px solid #2563eb;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
     .fadeIn {
       animation: fadeIn 0.5s ease-in-out;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Secciones ocultas por defecto */
-    #formRegistro, #formLogin, .catalogo { display: none; }
-
-    #authButtons {
-      margin: 2rem auto;
-      text-align: center;
-      animation: fadeIn 0.8s ease-in-out;
+    #formRegistro, #formLogin, #catalogoProductos, #panelProducto {
+      display: none;
     }
-    #authButtons button {
+
+    #authButtons, #userPanelButton {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    button {
       margin: 0.5rem;
       padding: 0.7rem 1.5rem;
       font-size: 1rem;
       border: none;
       border-radius: 8px;
-      background: #0ea5e9;
+      background: #2563eb;
       color: white;
       cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    #authButtons button:hover {
-      transform: scale(1.05);
-      background: #2563eb;
+      transition: 0.3s ease;
     }
 
-    .auth, .catalogo, .modal {
-      animation: fadeIn 0.5s ease-out;
+    button:hover {
+      transform: scale(1.05);
+      background: #1e3a8a;
+    }
+
+    form input, form textarea, form select {
+      display: block;
+      width: 90%;
+      margin: 0.5rem auto;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background: #10b981;
+      color: white;
+      border: none;
+    }
+
+    form button:hover {
+      background: #059669;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal .contenido {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .producto img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+    }
+
+    #userPanel {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 2rem auto;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
+
+  <!-- Política de Privacidad -->
+  <div id="politicaPrivacidad" class="modal">
+    <div class="contenido fadeIn">
+      <h2>🔐 Politik Konfidansyalite</h2>
+      <p>Boutik HenryTech kenbe enfòmasyon ou avèk sekirite. Pa gen okenn enfòmasyon pèsonèl ki itilize pou lòt rezon ke achte oswa kontak.</p>
+      <button onclick="aceptarPrivacidad()">Aksepte</button>
+    </div>
+  </div>
+
+  <!-- Encabezado -->
   <header>
     <h1>🏪 Byenveni nan Boutik HenryTech</h1>
     <p id="saludoHeader">Byenveni!</p>
+
     <div id="authButtons">
       <button onclick="mostrarRegistro()">🆕 Kreye Kont</button>
       <button onclick="mostrarLogin()">🔐 Konekte</button>
     </div>
+
+    <div id="userPanelButton" style="display:none;"></div>
   </header>
 
   <!-- Formulario de Registro -->
-  <section id="formRegistro" class="auth fadeIn">
+  <section id="formRegistro" class="fadeIn">
     <h2>🆕 Enskri</h2>
-    <form>
-      <input type="text" id="nombreReg" placeholder="Non ou" required />
+    <form onsubmit="registrarUsuario(event)">
       <input type="email" id="emailReg" placeholder="Imèl ou" required />
       <input type="password" id="passReg" placeholder="Modpas ou" required />
       <button type="submit">Kreye Kont</button>
     </form>
+    <button onclick="volverMenu()">↩️ Retounen</button>
   </section>
 
   <!-- Formulario de Login -->
-  <section id="formLogin" class="auth fadeIn">
+  <section id="formLogin" class="fadeIn">
     <h2>🔑 Konekte</h2>
-    <form>
+    <form onsubmit="iniciarSesion(event)">
       <input type="email" id="emailLogin" placeholder="Imèl ou" required />
       <input type="password" id="passLogin" placeholder="Modpas ou" required />
       <button type="submit">Konekte</button>
     </form>
+    <button onclick="volverMenu()">↩️ Retounen</button>
   </section>
 
-  <!-- Catálogo de productos -->
-  <section class="catalogo fadeIn" id="catalogoProductos">
-    <div class="producto">
-      <img src="asset/img/Camera wifi 360.jpg" alt="Pwodwi pou kay ou gen kontrol tout sa k'ap pase" />
-      <h3>camera 360</h3>
-      <p>$100 USD</p>
-      <button onclick="abrirPanel()">Rezève / Achte</button>
-    </div>
-    <div class="producto">
-      <img src="asset/img/Foto Starlinck.jpg" alt="Pwodwi pou kay ou gen entenet nenpot kote ou ye" />
-      <h3>Starlinck</h3>
-      <p>$450 USD</p>
-      <button onclick="abrirPanel()">Rezève / Achte</button>
-    </div>
-  </section>
+  <!-- Catálogo dinámico -->
+  <section id="catalogoProductos" class="fadeIn"></section>
 
-  <!-- Panel de reserva -->
-  <div id="panelProducto" class="modal">
-    <div class="contenido">
-      <span class="cerrar" onclick="cerrarPanel()">×</span>
-      <h3>Boîtier Gaming RGB</h3>
-      <form action="https://formsubmit.co/harryfrancois5@outlook.com" method="POST">
-        <input type="email" name="email" placeholder="Imèl ou" required />
-        <input type="text" name="location" placeholder="Kote sou kat Google" required />
-        <textarea name="notes" placeholder="Nòt siplemantè"></textarea>
-        <input type="hidden" name="_autoresponse" value="Mèsi anpil pou achte ou! N ap kontakte ou byento pou voye fakti ou. Si ou gen nenpòt kesyon, ou ka ekri nou sou info@henrytehcfr.com.">
-        <button type="submit">Konfime Komand</button>
-      </form>
-    </div>
-  </div>
+  <!-- Panel del Usuario Activo (renderizado dinámicamente por script.js) -->
+  <div id="userPanel"></div>
 
   <script src="script.js"></script>
 </body>

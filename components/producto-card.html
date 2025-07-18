@@ -1,8 +1,21 @@
 <div class="producto">
-  <img src="asset/img/prod1.jpg" alt="Boîtier RGB" />
-  <h3>Boîtier Gaming RGB</h3>
-  <p>$100 USD</p>
+  <img src="asset/img/Starlinck.jpg" alt=" Starlinck " />
+  <h3>Starlinck Internet</h3>
+  <p>$400 USD</p>
   <button onclick="abrirPanel()">Rezève / Achte</button>
   <button onclick="marcarFavorito(this)">❤️ Favori</button>
   <button onclick="agregarAlCarrito(this)">🛒 Panie</button>
 </div>
+function abrirPanelConProducto(index) {
+  const producto = productos[index];
+  document.querySelector("#panelProducto h3").textContent = producto.nombre;
+  
+  // Si quieres mostrar la imagen del producto en el panel
+  const imgPanel = document.querySelector("#panelProducto .contenido img");
+  if (imgPanel) {
+    imgPanel.src = producto.imagen;
+    imgPanel.alt = producto.nombre;
+  }
+
+  document.getElementById("panelProducto").style.display = "flex";
+}
