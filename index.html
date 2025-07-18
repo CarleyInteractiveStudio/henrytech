@@ -1,51 +1,19 @@
 <!DOCTYPE html>
-<html lang="ht">
+<html lang="es">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js"></script>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Boutik HenryTech</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="estilos.css" />
-
-  <!-- Supabase CDN -->
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-    }
-
-    header {
-      background: #0ea5e9;
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      border-bottom: 4px solid #2563eb;
-    }
-
-    h1 {
-      margin: 0;
-    }
-
-    .fadeIn {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
+    /* Tus estilos aquí (puedes pegarlos del original) */
+    body { font-family: sans-serif; background: #f5f7fa; }
+    .fadeIn { animation: fadeIn 0.5s; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    #formRegistro, #formLogin, #catalogoProductos, #panelProducto {
-      display: none;
-    }
-
-    #authButtons, #userPanelButton {
-      text-align: center;
-      margin: 1.5rem 0;
-    }
-
+    #formRegistro, #formLogin, #catalogoProductos, #panelProducto { display: none; }
+    #authButtons, #userPanelButton { text-align: center; margin: 1.5rem 0; }
     button {
       margin: 0.5rem;
       padding: 0.7rem 1.5rem;
@@ -57,63 +25,31 @@
       cursor: pointer;
       transition: 0.3s ease;
     }
-
-    button:hover {
-      transform: scale(1.05);
-      background: #1e3a8a;
-    }
-
+    button:hover { transform: scale(1.05); background: #1e3a8a; }
     form input, form textarea, form select {
       display: block;
       width: 90%;
       margin: 0.5rem auto;
       padding: 0.6rem;
-      font-size: 1rem;
+      border: 1px solid #ddd;
       border-radius: 6px;
-      border: 1px solid #ccc;
     }
-
-    form button {
-      background: #10b981;
-      color: white;
-      border: none;
-    }
-
-    form button:hover {
-      background: #059669;
-    }
-
     .modal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.2);
+      z-index: 1000;
       display: flex;
-      justify-content: center;
       align-items: center;
-      z-index: 999;
+      justify-content: center;
     }
-
     .modal .contenido {
-      background: white;
+      background: #fff;
       padding: 2rem;
       border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-    }
-
-    .producto img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: contain;
-    }
-
-    #userPanel {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin: 2rem auto;
-      max-width: 400px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: 2rem auto;
     }
   </style>
 </head>
@@ -132,18 +68,16 @@
   <header>
     <h1>🏪 Byenveni nan Boutik HenryTech</h1>
     <p id="saludoHeader">Byenveni!</p>
-
     <div id="authButtons">
-      <button onclick="mostrarRegistro()">🆕 Kreye Kont</button>
+      <button onclick="mostrarRegistro()">🇭🇹 Kreye Kont</button>
       <button onclick="mostrarLogin()">🔐 Konekte</button>
     </div>
-
     <div id="userPanelButton" style="display:none;"></div>
   </header>
 
   <!-- Formulario de Registro -->
   <section id="formRegistro" class="fadeIn">
-    <h2>🆕 Enskri</h2>
+    <h2>🇭🇹 Enskri</h2>
     <form onsubmit="registrarUsuario(event)">
       <input type="email" id="emailReg" placeholder="Imèl ou" required />
       <input type="password" id="passReg" placeholder="Modpas ou" required />
@@ -169,7 +103,9 @@
   <!-- Panel del Usuario Activo -->
   <div id="userPanel"></div>
 
-  <!-- Script final cargado correctamente -->
+  <!-- Carga Supabase primero -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Después tu script -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,6 +1,4 @@
-const { createClient } = supabase;
-
-// Inicializar Supabase correctamente en navegador
+// Inicializar Supabase
 const supabase = window.supabase.createClient(
   "https://dqpdhergtcyqvmjirlzv.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcGRoZXJndGN5cXZtamlybHp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI4Njc2OTIsImV4cCI6MjA2ODQ0MzY5Mn0.Z-LE-uUE3k9BqZWstfsTAxOiAu90dD0YwaK0uSH1WJw"
@@ -30,9 +28,7 @@ async function registrarUsuario(e) {
   e.preventDefault();
   const email = document.getElementById("emailReg").value;
   const password = document.getElementById("passReg").value;
-
   const { error } = await supabase.auth.signUp({ email, password });
-
   if (error) {
     alert("Erè pandan enskripsyon: " + error.message);
   } else {
@@ -47,9 +43,7 @@ async function iniciarSesion(e) {
   e.preventDefault();
   const email = document.getElementById("emailLogin").value;
   const password = document.getElementById("passLogin").value;
-
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
   if (error) {
     alert("Login erè: " + error.message);
   } else {
@@ -107,7 +101,7 @@ function mostrarConfirmacionCorreo() {
   const panel = document.createElement("div");
   panel.innerHTML = `
     <div style="background:#fff;padding:1.5rem;border-radius:10px;max-width:400px;margin:2rem auto;">
-      <h3>📩 Konfimasyon Imèl</h3>
+      <h3>📧 Konfimasyon Imèl</h3>
       <p>Antre kòd sekirite ou resevwa nan imèl la:</p>
       <input type="text" id="codigoIngresado" placeholder="Kòd 6 chif yo" />
       <button onclick="validarCodigo()">Konfime</button>
@@ -157,7 +151,7 @@ async function abrirPanelUsuario() {
 
   let contenido = `
     <h3>👤 Itilizatè: ${user.email}</h3>
-    ${!confirmado ? `<button onclick="enviarCodigoVerificacion()">📩 Konfime Imèl</button>` : `<p style="color:green;">✅ Imèl konfime</p>`}
+    ${!confirmado ? `<button onclick="enviarCodigoVerificacion()">📧 Konfime Imèl</button>` : `<p style="color:green;">✅ Imèl konfime</p>`}
   `;
 
   const panel = document.createElement("div");
@@ -204,14 +198,15 @@ function solicitarProducto(nombre) {
   form.innerHTML = `
     <h3>📝 Demann pou: ${nombre}</h3>
     <select id="zonaEntrega" required>
-      <option value="">Chwazi kote livrezon      <option>Thomonde</option>
+      <option value="">Chwazi kote livrezon</option>
+      <option>Thomonde</option>
       <option>Hinche</option>
       <option>Peligre</option>
       <option>Cap Haïtien</option>
     </select>
     <input type="text" id="whatsappUser" placeholder="Nimewo WhatsApp ou" required />
     <textarea id="notes" placeholder="Nòt pou livrezon (opsyonèl)"></textarea>
-    <button type="submit">📩 Voye demann</button>
+    <button type="submit">📧 Voye demann</button>
   `;
 
   form.onsubmit = async function (e) {
