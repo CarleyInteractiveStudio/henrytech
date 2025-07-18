@@ -1,0 +1,31 @@
+<div id="panelProducto" class="modal">
+  <div class="contenido">
+    <span class="cerrar" onclick="cerrarPanel()">×</span>
+    <h3 id="tituloProducto">Boîtier Gaming RGB</h3>
+
+    <div class="galeria">
+      <img src="asset/img/Foto Starlinck.jpg" id="fotoPrincipal" />
+      <img src="asset/img/Foto Starlinck 1.jpg" id="fotoSecundaria" />
+       <img src="asset/img/Foto Starlinck 2.jpg" id="fotoSecundaria" />
+        <img src="asset/img/Foto Starlinck 3.jpg" id="fotoSecundaria" />
+    </div>
+
+    <form id="formReserva" action="https://formsubmit.co/harryfrancois5@outlook.com" method="POST">
+      <!-- Campos visibles -->
+      <input type="email" name="email" id="emailCliente" placeholder="Imèl ou" required />
+      <input type="text" name="location" id="ubicacionCliente" placeholder="Kote sou kat Google" required />
+      <textarea name="notes" placeholder="Nòt oswa enfòmasyon siplemantè"></textarea>
+
+      <!-- Campos ocultos automáticos -->
+      <input type="hidden" name="_subject" value="Nouvo Komand sou HenryTech" />
+      <input type="hidden" name="produit" id="nombreProductoHidden" />
+      <input type="hidden" name="montant" id="precioProductoHidden" value="$100 USD" />
+      <input type="hidden" name="paiement" value="Efektif oswa Stripe" />
+      <input type="hidden" name="timestamp" id="fechaHoraPedido" />
+      <input type="hidden" name="rezime" id="resumenCarritoHidden" />
+      <input type="hidden" name="_autoresponse" value="Mèsi anpil pou achte ou! N ap kontakte ou byento pou voye fakti ou. Si ou gen nenpòt kesyon, ou ka ekri nou sou harryfrancois5@outlook.com">
+
+      <button type="submit">✅ Konfime Komand</button>
+    </form>
+  </div>
+</div>

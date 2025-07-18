@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8" />
+  <title>Boutik HenryTech</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="estilos.css" />
+  <style>
+    /* Animaciones simples */
+    .fadeIn {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Secciones ocultas por defecto */
+    #formRegistro, #formLogin, .catalogo { display: none; }
+
+    #authButtons {
+      margin: 2rem auto;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    #authButtons button {
+      margin: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #0ea5e9;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #authButtons button:hover {
+      transform: scale(1.05);
+      background: #2563eb;
+    }
+
+    .auth, .catalogo, .modal {
+      animation: fadeIn 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏪 Byenveni nan Boutik HenryTech</h1>
+    <p id="saludoHeader">Byenveni!</p>
+    <div id="authButtons">
+      <button onclick="mostrarRegistro()">🆕 Kreye Kont</button>
+      <button onclick="mostrarLogin()">🔐 Konekte</button>
+    </div>
+  </header>
+
+  <!-- Formulario de Registro -->
+  <section id="formRegistro" class="auth fadeIn">
+    <h2>🆕 Enskri</h2>
+    <form>
+      <input type="text" id="nombreReg" placeholder="Non ou" required />
+      <input type="email" id="emailReg" placeholder="Imèl ou" required />
+      <input type="password" id="passReg" placeholder="Modpas ou" required />
+      <button type="submit">Kreye Kont</button>
+    </form>
+  </section>
+
+  <!-- Formulario de Login -->
+  <section id="formLogin" class="auth fadeIn">
+    <h2>🔑 Konekte</h2>
+    <form>
+      <input type="email" id="emailLogin" placeholder="Imèl ou" required />
+      <input type="password" id="passLogin" placeholder="Modpas ou" required />
+      <button type="submit">Konekte</button>
+    </form>
+  </section>
+
+  <!-- Catálogo de productos -->
+  <section class="catalogo fadeIn" id="catalogoProductos">
+    <div class="producto">
+      <img src="asset/img/Camera wifi 360.jpg" alt="Pwodwi pou kay ou gen kontrol tout sa k'ap pase" />
+      <h3>camera 360</h3>
+      <p>$100 USD</p>
+      <button onclick="abrirPanel()">Rezève / Achte</button>
+    </div>
+    <div class="producto">
+      <img src="asset/img/Foto Starlinck.jpg" alt="Pwodwi pou kay ou gen entenet nenpot kote ou ye" />
+      <h3>Starlinck</h3>
+      <p>$450 USD</p>
+      <button onclick="abrirPanel()">Rezève / Achte</button>
+    </div>
+  </section>
+
+  <!-- Panel de reserva -->
+  <div id="panelProducto" class="modal">
+    <div class="contenido">
+      <span class="cerrar" onclick="cerrarPanel()">×</span>
+      <h3>Boîtier Gaming RGB</h3>
+      <form action="https://formsubmit.co/harryfrancois5@outlook.com" method="POST">
+        <input type="email" name="email" placeholder="Imèl ou" required />
+        <input type="text" name="location" placeholder="Kote sou kat Google" required />
+        <textarea name="notes" placeholder="Nòt siplemantè"></textarea>
+        <input type="hidden" name="_autoresponse" value="Mèsi anpil pou achte ou! N ap kontakte ou byento pou voye fakti ou. Si ou gen nenpòt kesyon, ou ka ekri nou sou info@henrytehcfr.com.">
+        <button type="submit">Konfime Komand</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

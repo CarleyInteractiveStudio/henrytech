@@ -1,0 +1,35 @@
+window.addEventListener("DOMContentLoaded", () => {
+  const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+  if (usuario) {
+    saludarUsuario(usuario);
+    recomendarProducto();
+  }
+});
+
+// Saludo personalizado
+function saludarUsuario(usuario) {
+  const mensaje = `🤖 Bonjou ${usuario.nombre}! Èske ou bezwen èd pou jwenn pwodwi ou vle?`;
+  mostrarRobot(mensaje);
+}
+
+// Recomendación básica
+function recomendarProducto() {
+  const favoritos = JSON.parse(localStorage.getItem("favoritos_" + usuarioActivo().email)) || [];
+  let sugerido = favoritos.length > 0 ? favoritos[0] : "Boîtier Gaming RGB";
+  const mensaje = `🤖 Nou rekòmande '${sugerido}' pou ou. Li trè popilè!`;
+  mostrarRobot(mensaje);
+}
+
+// Asistente tipo chatbot (mensaje al usuario)
+function mostrarRobot(texto) {
+  const robotMsg = document.createElement("div");
+  robotMsg.className = "robot-msg";
+  robotMsg.textContent = texto;
+  document.body.appendChild(robotMsg);
+  setTimeout(() => robotMsg.remove(), 10000);
+}
+
+// Acceso rápido al usuario activo
+function usuarioActivo() {
+  return JSON.parse(localStorage.getItem("usuarioActivo")) || { nombre: "Vizitè", email: "anonim@henrytech.com" };
+}

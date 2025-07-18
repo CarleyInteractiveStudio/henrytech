@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sistemaHenryTech>
+  <tienda>
+    <nombre>Boutik HenryTech</nombre>
+    <descripcion>Tienda multilingüe de productos tecnológicos</descripcion>
+    <idiomas>
+      <principal>Kreyòl ayisyen</principal>
+      <secundario>Français</secundario>
+      <tercero>English</tercero>
+    </idiomas>
+    <traduccionAutomatica>GoogleTranslate</traduccionAutomatica>
+    <fondoCSS>degradado RGB moderno</fondoCSS>
+  </tienda>
+
+  <usuarios>
+    <registro>localStorage</registro>
+    <inicioSesion>localStorage + validación manual</inicioSesion>
+    <cuenta>
+      <favoritos>habilitado</favoritos>
+      <carrito>habilitado</carrito>
+      <historial>planeado</historial>
+    </cuenta>
+  </usuarios>
+
+  <productos>
+    <vistaRapida>panelEmergente</vistaRapida>
+    <galeria>solo imágenes</galeria>
+    <reserva>
+      <formulario>FormSubmit</formulario>
+      <correoDestino>henrytech@gmail.com</correoDestino>
+    </reserva>
+  </productos>
+
+  <pagos>
+    <efectivo>activo</efectivo>
+    <stripe>pendiente</stripe>
+    <paypal>pendiente</paypal>
+  </pagos>
+
+  <robotAsistente>
+    <nombre>HenryBot</nombre>
+    <activo>sí</activo>
+    <funciones>
+      <saludo>true</saludo>
+      <sugerencias>true</sugerencias>
+      <mensajesEmergentes>true</mensajesEmergentes>
+    </funciones>
+  </robotAsistente>
+
+  <sitioWeb>
+    <dominio>henrytehcfr.com</dominio>
+    <hosting>GitHubPages</hosting>
+    <favicon>favicon.png</favicon>
+    <seo>
+      <sitemap>sitemap.xml</sitemap>
+      <robots>robots.txt</robots>
+    </seo>
+  </sitioWeb>
+</sistemaHenryTech>
