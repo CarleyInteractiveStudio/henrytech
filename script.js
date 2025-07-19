@@ -23,16 +23,20 @@ function volverMenu() {
   document.getElementById("authButtons").style.display = "block";
 }
 
-// Registro
+// Registro con envío de código
 async function registrarUsuario(e) {
   e.preventDefault();
   const email = document.getElementById("emailReg").value;
   const password = document.getElementById("passReg").value;
-  const { error } = await supabase.auth.signUp({ email, password });
+  const { data, error } = await supabase.auth.signUp({ email, password });
+
   if (error) {
     alert("Erè pandan enskripsyon: " + error.message);
   } else {
-    alert("Enskripsyon reyalize! Tcheke imèl ou pou verifye kont lan.");
+    const user = data.user;
+    const codigo = Math.floor(100000 + Math.random() * 900000).toString();
+    await supabase.from("codigo_verificacion").insert([{ user_id: user.id, email, codigo }]);
+    alert("✅ Enskripsyon reyalize! Tcheke imèl ou pou verifye kont lan.");
     e.target.reset();
     volverMenu();
   }
@@ -44,6 +48,7 @@ async function iniciarSesion(e) {
   const email = document.getElementById("emailLogin").value;
   const password = document.getElementById("passLogin").value;
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
   if (error) {
     alert("Login erè: " + error.message);
   } else {
@@ -54,8 +59,7 @@ async function iniciarSesion(e) {
     document.getElementById("formLogin").style.display = "none";
     document.getElementById("catalogoProductos").style.display = "block";
     document.getElementById("userPanelButton").style.display = "block";
-    document.getElementById("userPanelButton").innerHTML = `<button onclick="abrirPanelUsuario()">👤 ${user.email}</button>`;
-    e.target.reset();
+    document.getElementById("userEmail").textContent = user.email;
     mostrarProductos();
   }
 }
@@ -73,7 +77,7 @@ function verificarSesionAutomatica() {
     document.getElementById("authButtons").style.display = "none";
     document.getElementById("catalogoProductos").style.display = "block";
     document.getElementById("userPanelButton").style.display = "block";
-    document.getElementById("userPanelButton").innerHTML = `<button onclick="abrirPanelUsuario()">👤 ${user.email}</button>`;
+    document.getElementById("userEmail").textContent = user.email;
     mostrarProductos();
   }
 }
@@ -82,21 +86,7 @@ window.onload = function () {
   document.getElementById("politicaPrivacidad").style.display = "flex";
 }
 
-// Confirmación de correo
-async function enviarCodigoVerificacion() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return alert("Ou pa konekte.");
-
-  const codigo = Math.floor(100000 + Math.random() * 900000).toString();
-
-  await supabase.from("codigo_verificacion").insert([
-    { user_id: user.id, email: user.email, codigo }
-  ]);
-
-  alert(`Kòd verifikasyon voye nan: ${user.email}`);
-  mostrarConfirmacionCorreo();
-}
-
+// Código de verificación por correo
 function mostrarConfirmacionCorreo() {
   const panel = document.createElement("div");
   panel.innerHTML = `
@@ -139,7 +129,6 @@ async function validarCodigo() {
 // Panel del usuario
 async function abrirPanelUsuario() {
   const { data: { user } } = await supabase.auth.getUser();
-
   const { data } = await supabase
     .from("codigo_verificacion")
     .select("confirmado")
@@ -149,19 +138,22 @@ async function abrirPanelUsuario() {
 
   const confirmado = data && data.length > 0 ? data[0].confirmado : false;
 
-  let contenido = `
-    <h3>👤 Itilizatè: ${user.email}</h3>
-    ${!confirmado ? `<button onclick="enviarCodigoVerificacion()">📧 Konfime Imèl</button>` : `<p style="color:green;">✅ Imèl konfime</p>`}
+  const panel = document.getElementById("menuUsuario");
+  panel.innerHTML = `
+    <button onclick="mostrarCarrito()">🛒 Panier</button>
+    <button onclick="mostrarFavoritos()">❤️ Favori</button>
+    <button onclick="mostrarHistorial()">📜 Demann</button>
+    ${!confirmado ? `<button onclick="mostrarConfirmacionCorreo()">📧 Konfime Imèl</button>` : `<p style="color:green;">✅ Imèl konfime</p>`}
   `;
-
-  const panel = document.createElement("div");
-  panel.id = "userPanel";
-  panel.innerHTML = contenido;
-  document.getElementById("userPanel").innerHTML = "";
-  document.getElementById("userPanel").appendChild(panel);
 }
 
-// Mostrar catálogo sin precios
+// Toggle menú del usuario
+function toggleMenuUsuario() {
+  const menu = document.getElementById("menuUsuario");
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
+}
+
+// Mostrar productos
 function mostrarProductos() {
   const productos = [
     { nombre: "Kamera Sekirite 1", descripcion: "Kamera pou sekirite estanda", imagen: "images/camaradevigilancia1.jpg" },
@@ -229,7 +221,7 @@ function solicitarProducto(nombre) {
       body: JSON.stringify(payload)
     });
 
-    alert("✅ Demann ou voye! Henrytech pral kontakte ou sou WhatsApp.");
+    alert("✅ Demann ou voye! HenryTech pral kontakte ou sou WhatsApp o Gmail");
     form.reset();
   };
 

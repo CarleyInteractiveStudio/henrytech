@@ -1,61 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ht">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Boutik HenryTech</title>
-  <style>
-    /* Tus estilos aquí (puedes pegarlos del original) */
-    body { font-family: sans-serif; background: #f5f7fa; }
-    .fadeIn { animation: fadeIn 0.5s; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    #formRegistro, #formLogin, #catalogoProductos, #panelProducto { display: none; }
-    #authButtons, #userPanelButton { text-align: center; margin: 1.5rem 0; }
-    button {
-      margin: 0.5rem;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-    button:hover { transform: scale(1.05); background: #1e3a8a; }
-    form input, form textarea, form select {
-      display: block;
-      width: 90%;
-      margin: 0.5rem auto;
-      padding: 0.6rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-    .modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.2);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal .contenido {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 400px;
-      margin: 2rem auto;
-    }
-  </style>
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="estilos.css" />
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
 
-  <!-- Política de Privacidad -->
+  <!-- Modal de privacidad al cargar -->
   <div id="politicaPrivacidad" class="modal">
     <div class="contenido fadeIn">
       <h2>🔐 Politik Konfidansyalite</h2>
@@ -66,18 +24,24 @@
 
   <!-- Encabezado -->
   <header>
-    <h1>🏪 Byenveni nan Boutik HenryTech</h1>
+    <h1>🏪 Byenveni nan HenryTech</h1>
     <p id="saludoHeader">Byenveni!</p>
+
     <div id="authButtons">
-      <button onclick="mostrarRegistro()">🇭🇹 Kreye Kont</button>
+      <button onclick="mostrarRegistro()">🆕 Kreye Kont</button>
       <button onclick="mostrarLogin()">🔐 Konekte</button>
     </div>
-    <div id="userPanelButton" style="display:none;"></div>
+
+    <div id="userPanelButton" style="display:none;">
+      <button onclick="toggleMenuUsuario()">👤 <span id="userEmail"></span></button>
+    </div>
+
+    <div id="menuUsuario" style="display:none; text-align:center; margin-top:1rem;"></div>
   </header>
 
   <!-- Formulario de Registro -->
-  <section id="formRegistro" class="fadeIn">
-    <h2>🇭🇹 Enskri</h2>
+  <section id="formRegistro" class="auth fadeIn" style="display:none;">
+    <h2>🆕 Enskri</h2>
     <form onsubmit="registrarUsuario(event)">
       <input type="email" id="emailReg" placeholder="Imèl ou" required />
       <input type="password" id="passReg" placeholder="Modpas ou" required />
@@ -87,7 +51,7 @@
   </section>
 
   <!-- Formulario de Login -->
-  <section id="formLogin" class="fadeIn">
+  <section id="formLogin" class="auth fadeIn" style="display:none;">
     <h2>🔑 Konekte</h2>
     <form onsubmit="iniciarSesion(event)">
       <input type="email" id="emailLogin" placeholder="Imèl ou" required />
@@ -100,12 +64,13 @@
   <!-- Catálogo dinámico -->
   <section id="catalogoProductos" class="fadeIn"></section>
 
-  <!-- Panel del Usuario Activo -->
+  <!-- Panel del Usuario (confirmación) -->
   <div id="userPanel"></div>
 
-  <!-- Carga Supabase primero -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <!-- Después tu script -->
+  <!-- Panel del Carrito -->
+  <div id="panelCarrito" style="display:none;"></div>
+
+  <!-- Script principal -->
   <script src="script.js"></script>
 </body>
 </html>
