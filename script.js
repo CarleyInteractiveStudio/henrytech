@@ -160,9 +160,9 @@ function mostrarProductos() {
     { nombre: "Kamera Sekirite 2", descripcion: "Kamera 360° ak rotasyon", imagen: "assets/img/camaradevigilancia2.jpg" },
     { nombre: "Kamera WiFi 360", descripcion: "Kamera entelijan san fil", imagen: "assets/img/camerawifi.jpg" },
     { nombre: "Kit Starlink", descripcion: "Kit konplè pou  Starlink", imagen: "assets/img/Starlinck.jpg" },
-    { nombre: "Foto Starlink 1", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck1.jpg" },
-    { nombre: "Foto Starlink 2", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck2.jpg" },
-    { nombre: "Foto Starlink 3", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck3.jpg" }
+    { nombre: "Starlink", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck1.jpg" },
+    { nombre: "Altèn pou Starlink", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck2.jpg" },
+    { nombre: "Starlink kople pou kay ou", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck3.jpg" }
   ];
 
   const contenedor = document.getElementById("catalogoProductos");
@@ -175,7 +175,7 @@ function mostrarProductos() {
       <img src="${producto.imagen}" alt="${producto.nombre}" />
       <h3>${producto.nombre}</h3>
       <p>${producto.descripcion}</p>
-      <button onclick="solicitarProducto('${producto.nombre}')">🤝 Mande Kontak</button>
+      <button onclick="solicitarProducto('${producto.nombre}')">🤝 mande youn la dan</button>
     `;
     contenedor.appendChild(card);
   });
