@@ -6,6 +6,7 @@ body {
   color: white;
   min-height: 100vh;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* 🏷️ Encabezado */
@@ -16,7 +17,6 @@ header {
   border-radius: 8px;
   border-bottom: 3px solid #2563eb;
 }
-
 h1 {
   font-size: 2rem;
   margin: 0;
@@ -31,7 +31,7 @@ h1 {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 🔐 Contenedor de autenticación */
+/* 🔐 Autenticación */
 .auth, #formRegistro, #formLogin {
   background-color: rgba(255,255,255,0.08);
   padding: 1.2rem;
@@ -41,7 +41,8 @@ h1 {
   backdrop-filter: blur(6px);
 }
 
-.auth input, .auth button, form input, form textarea, form select, form button {
+.auth input, .auth button,
+form input, form textarea, form select, form button {
   display: block;
   width: 100%;
   padding: 0.6rem;
@@ -49,6 +50,7 @@ h1 {
   border-radius: 6px;
   border: none;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 form button {
@@ -68,18 +70,22 @@ form button:hover {
 #authButtons button {
   background: #2563eb;
   font-weight: bold;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  border: none;
 }
 #authButtons button:hover {
   background: #1e3a8a;
 }
 
-/* 🛒 Catálogo */
-.catalogo, #catalogoProductos {
+/* 🛍️ Catálogo */
+#catalogoProductos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
 .producto {
@@ -87,7 +93,7 @@ form button:hover {
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
-  width: 300px;
+  width: 280px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   transition: transform 0.3s;
 }
@@ -105,9 +111,26 @@ form button:hover {
   background: #22c55e;
   color: white;
   font-weight: bold;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  margin-top: 0.5rem;
 }
 .producto button:hover {
   background: #16a34a;
+}
+
+/* 📄 Formularios emergentes */
+.formEmergente {
+  background-color: rgba(255,255,255,0.12);
+  color: white;
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  margin: 2rem auto;
+  max-width: 400px;
+  width: 90%;
 }
 
 /* 🧊 Modal */
@@ -139,7 +162,7 @@ form button:hover {
   color: #555;
 }
 
-/* 🧑 Panel del usuario desplegable */
+/* 👤 Panel del usuario */
 #menuUsuario button {
   margin: 0.4rem;
   padding: 0.6rem 1.2rem;
@@ -153,15 +176,34 @@ form button:hover {
   background: #7e22ce;
 }
 
+/* 🕐 Loader mensaje */
+.loader-msg {
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 8px;
+  margin: 1rem auto;
+  max-width: 300px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 /* 📱 Responsive para móviles */
 @media (max-width: 600px) {
   .producto {
-    width: 90%;
+    width: 100%;
+    max-width: 320px;
   }
-  .auth {
-    width: 90%;
+  .auth, .formEmergente, #formRegistro, #formLogin {
+    width: 100%;
+    max-width: 320px;
+    padding: 1rem;
   }
   header h1 {
     font-size: 1.6rem;
+  }
+  .contenido {
+    padding: 1.5rem;
   }
 }
