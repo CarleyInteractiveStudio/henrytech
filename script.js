@@ -215,14 +215,14 @@ function solicitarProducto(nombre) {
       nòt: notes
     };
 
-    await fetch("https://formsubmit.co/ajax/harryfrancois5@outlook.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    await fetch("https://formsubmit.co/ajax/johncarley14@gmail.com", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload)
+});
 
-    alert("✅ Demann ou voye! HenryTech pral kontakte ou sou WhatsApp o Gmail");
-    form.reset();
+// ✅ Redirigir al usuario a la página de agradecimiento
+window.location.href = "gracias.html";
   };
 
   form.style.background = "#fff";
