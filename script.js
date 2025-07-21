@@ -206,23 +206,28 @@ function solicitarProducto(nombre) {
     const zona = document.getElementById("zonaEntrega").value;
     const whatsapp = document.getElementById("whatsappUser").value;
     const notes = document.getElementById("notes").value;
+    const timestamp = new Date().toLocaleString("es-DO");
 
     const payload = {
       produit: nombre,
       email: user.email,
       whatsapp,
       zona,
-      nòt: notes
+      nòt: notes,
+      fechaHora: timestamp
     };
 
-    await fetch("https://formsubmit.co/ajax/harryfrancois5@outlook.com", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(payload)
-});
+    const response = await fetch("https://formsubmit.co/ajax/harryfrancois5@outlook.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-// ✅ Redirigir al usuario a la página de agradecimiento
-window.location.href = "gracias.html";
+    if (response.ok) {
+      window.location.href = "gracias.html";
+    } else {
+      alert("❌ Erè pandan voye demann. Tanpri tcheke koneksyon ou oswa eseye ankò.");
+    }
   };
 
   form.style.background = "#fff";
