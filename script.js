@@ -156,13 +156,13 @@ function toggleMenuUsuario() {
 // Mostrar productos
 function mostrarProductos() {
   const productos = [
-    { nombre: "Kamera Sekirite 1", descripcion: "Kamera pou sekirite estanda", imagen: "images/camaradevigilancia1.jpg" },
-    { nombre: "Kamera Sekirite 2", descripcion: "Kamera 360° ak rotasyon", imagen: "images/camaradevigilancia2.jpg" },
-    { nombre: "Kamera WiFi 360", descripcion: "Kamera entelijan san fil", imagen: "images/camerawifi.jpg" },
-    { nombre: "Kit Starlink", descripcion: "Kit konplè pou koneksyon satelit", imagen: "images/starlinck.jpg" },
-    { nombre: "Foto Starlink 1", descripcion: "Altènatif vizyèl pou Starlink", imagen: "images/starlinck1.jpg" },
-    { nombre: "Foto Starlink 2", descripcion: "Altènatif vizyèl pou Starlink", imagen: "images/starlinck2.jpg" },
-    { nombre: "Foto Starlink 3", descripcion: "Altènatif vizyèl pou Starlink", imagen: "images/starlinck3.jpg" }
+    { nombre: "Kamera Sekirite 1", descripcion: "Kamera pou sekirite estanda", imagen: "assets/img/camaradevigilancia1.jpg" },
+    { nombre: "Kamera Sekirite 2", descripcion: "Kamera 360° ak rotasyon", imagen: "assets/img/camaradevigilancia2.jpg" },
+    { nombre: "Kamera WiFi 360", descripcion: "Kamera entelijan san fil", imagen: "assets/img/camerawifi.jpg" },
+    { nombre: "Kit Starlink", descripcion: "Kit konplè pou koneksyon satelit", imagen: "assets/img/starlinck.jpg" },
+    { nombre: "Foto Starlink 1", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/starlinck1.jpg" },
+    { nombre: "Foto Starlink 2", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/starlinck2.jpg" },
+    { nombre: "Foto Starlink 3", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/starlinck3.jpg" }
   ];
 
   const contenedor = document.getElementById("catalogoProductos");
@@ -215,7 +215,7 @@ function solicitarProducto(nombre) {
       nòt: notes
     };
 
-    await fetch("https://formsubmit.co/ajax/johncarley14@gmail.com", {
+    await fetch("https://formsubmit.co/ajax/harryfrancois5@outlook.com", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(payload)
