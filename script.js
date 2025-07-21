@@ -156,8 +156,8 @@ function toggleMenuUsuario() {
 // Mostrar productos
 function mostrarProductos() {
   const productos = [
-    { nombre: "Kamera Sekirite 1", descripcion: "Kamera pou sekirite estanda", imagen: "assets/img/camaradevigilancia1.jpg" },
-    { nombre: "Kamera Sekirite 2", descripcion: "Kamera 360° ak rotasyon", imagen: "assets/img/camaradevigilancia2.jpg" },
+    { nombre: "Kamera Sekirite", descripcion: "Kamera pou sekirite estanda", imagen: "assets/img/camaradevigilancia1.jpg" },
+    { nombre: "Kamera Sekirite ak pano soley", descripcion: "Kamera 360° ak rotasyon", imagen: "assets/img/camaradevigilancia2.jpg" },
     { nombre: "Kamera WiFi 360", descripcion: "Kamera entelijan san fil", imagen: "assets/img/camerawifi.jpg" },
     { nombre: "Kit Starlink", descripcion: "Kit konplè pou  Starlink", imagen: "assets/img/Starlinck.jpg" },
     { nombre: "Starlink", descripcion: "Altènatif vizyèl pou Starlink", imagen: "assets/img/Starlinck1.jpg" },
